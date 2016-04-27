@@ -1,0 +1,1 @@
+	ifc -O3 -Bstatic -o ztest02g_da01a test02g_da01a.f90 sflux_subs6.f90 dsrc2c.f90 -lc -L/home/workspace/ccalmr/mazulauf/lib/x86/ -lmfhdf -ldf -ljpeg -lz

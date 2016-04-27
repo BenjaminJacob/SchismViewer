@@ -1,0 +1,8 @@
+fill_in=-9999       !Fill in value used for abnormal case (e.g., below bottom, dry etc)
+basedir="blubb"   !basedir - directory where binary and build point files are stored
+binary_file=salt !binary_file - elev.61, hvel.64 etc; it should be inside basedir
+istack1=1 !     istack[1,2] - start and end stack # for binary outputs;
+istack2=2
+ialong_S=1klev0=41
+ifs=-9999
+zout=-9999

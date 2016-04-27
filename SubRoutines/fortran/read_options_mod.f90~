@@ -1,0 +1,268 @@
+
+MODULE read_options_mod
+!PROGRAM read_options
+
+
+CONTAINS 
+
+
+
+
+! !!!!!!!!!!!!!!!!!!! T I M E S E R I E S   V E R S I O N !!!!!!!!!!!!!!!!!!!
+SUBROUTINE get_opts_TS(fill_in,runDir,basedir,binary_file,istack1,istack2,bp_file,ics,ifs)
+
+
+IMPLICIT NONE
+!SAVE
+
+!CONTAINS
+!     Fill in value used for abnormal case (e.g., below bottom, dry etc)
+! INTEGER :: fill_in
+ REAL, INTENT (OUT) :: fill_in
+! basedir - directory where binary and build point files are stored
+ CHARACTER(len=*), INTENT (OUT) :: basedir,runDir 
+
+!     binary_file - 'elev.61', 'hvel.64' etc; it should be inside basedir
+ CHARACTER(len=*), INTENT (OUT) :: binary_file ! elev.61, salt.63 ...
+
+!     istack[1,2] - start and end stack # for binary outputs;
+INTEGER, INTENT (OUT) ::   istack1, istack2,ics,ifs
+
+
+
+ CHARACTER(len=*), INTENT (OUT) :: bp_file
+ 
+ CHARACTER(500) :: buffer
+ CHARACTER(30) :: label
+ INTEGER :: ios, ios2, leng
+ INTEGER :: ValuePos, CommentPos
+
+ios=0
+OPEN(UNIT=20,FILE="extract_options")
+
+ DO WHILE (ios==0) 
+
+ 	READ(20,"(A)",iostat=ios) buffer
+
+        Valuepos = scan(buffer, '=',.TRUE.)! search last = .True.
+	CommentPos = scan(buffer, '!')
+	label=TRIM(buffer(1:Valuepos-1))
+
+	
+        IF (CommentPos==0) THEN
+		buffer=TRIM(buffer(Valuepos+1:))
+	ELSE
+		buffer=TRIM(buffer(Valuepos+1:CommentPos-1)) 
+        END IF         
+        
+
+	SELECT CASE(TRIM(label))
+
+        case('fill_in')
+		read(buffer,*,iostat=ios2) fill_in
+	case('basedir')
+		read(buffer,*,iostat=ios2) basedir
+	case('binary_file')
+		read(buffer,*,iostat=ios2) binary_file
+	case('istack1')
+		read(buffer,*,iostat=ios2) istack1
+	case('istack2')
+		read(buffer,*,iostat=ios2) istack2
+	case('bp_file')
+		read(buffer,*,iostat=ios2) bp_file
+	case('ics')
+		read(buffer,*,iostat=ios2) ics
+	case('ifs')
+		read(buffer,*,iostat=ios2) ifs
+	case('rundir')
+		read(buffer,*,iostat=ios2) runDir
+
+
+	END SELECT
+
+ END DO
+
+
+   leng=len_trim(basedir)
+	IF (basedir(leng:leng) .NE. '/' ) THEN
+		basedir(leng+1:leng+1)='/'
+	ENDIF	
+
+ CLOSE(20)
+      write(*,*) 'basedir: ', basedir, 'binary file: ', binary_file
+END SUBROUTINE
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+
+
+
+
+
+! !!!!!!!!!!!!!!!!!!! S L A B     V E R S I O N !!!!!!!!!!!!!!!!!!!
+SUBROUTINE get_opts_slab(fill_in,basedir,binary_file,istack1,istack2,ialong_S,klev0,ifs,zout)
+
+IMPLICIT NONE
+!SAVE
+
+!CONTAINS
+!     Fill in value used for abnormal case (e.g., below bottom, dry etc)
+! INTEGER :: fill_in
+ REAL, INTENT (OUT) :: fill_in
+! basedir - directory where binary and build point files are stored
+ CHARACTER(len=*), INTENT (OUT) :: basedir 
+
+!     binary_file - 'elev.61', 'hvel.64' etc; it should be inside basedir
+ CHARACTER(len=*), INTENT (OUT) :: binary_file ! elev.61, salt.63 ...
+
+!     istack[1,2] - start and end stack # for binary outputs;
+INTEGER, INTENT (OUT) ::   istack1, istack2
+
+ INTEGER, INTENT (OUT) :: ialong_S, klev0, ifs, zout
+
+ 
+ CHARACTER(500) :: buffer
+ CHARACTER(30) :: label
+ INTEGER :: ios, ios2, leng
+ INTEGER :: ValuePos, CommentPos
+
+ios=0
+OPEN(UNIT=20,FILE="extract_options")
+
+ DO WHILE (ios==0) 
+
+ 	READ(20,"(A)",iostat=ios) buffer
+
+        Valuepos = scan(buffer, '=',.TRUE.)! search last = .True.
+	CommentPos = scan(buffer, '!')
+	label=TRIM(buffer(1:Valuepos-1))
+
+	
+        IF (CommentPos==0) THEN
+		buffer=TRIM(buffer(Valuepos+1:))
+	ELSE
+		buffer=TRIM(buffer(Valuepos+1:CommentPos-1)) 
+        END IF         
+        
+
+	SELECT CASE(TRIM(label))
+
+        case('fill_in')
+		read(buffer,*,iostat=ios2) fill_in
+	case('basedir')
+		read(buffer,*,iostat=ios2) basedir
+	case('binary_file')
+		read(buffer,*,iostat=ios2) binary_file
+	case('istack1')
+		read(buffer,*,iostat=ios2) istack1
+	case('istack2')
+		read(buffer,*,iostat=ios2) istack2
+	case('ialong_S')
+		read(buffer,*,iostat=ios2) ialong_S
+	case('klev0')
+		read(buffer,*,iostat=ios2) klev0
+	case('ifs')
+		read(buffer,*,iostat=ios2) ifs
+	case('zout')
+		read(buffer,*,iostat=ios2) zout
+
+	END SELECT
+
+ END DO
+
+
+   leng=len_trim(basedir)
+	IF (basedir(leng:leng) .NE. '/' ) THEN
+		basedir(leng+1:leng+1)='/'
+	ENDIF	
+
+ CLOSE(20)
+      write(*,*) 'basedir: ', basedir, 'binary file: ', binary_file
+END SUBROUTINE
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+
+
+
+
+
+! !!!!!!!!!!!!!!!!!!! XYZT   V E R S I O N !!!!!!!!!!!!!!!!!!!
+SUBROUTINE get_opts_xyzt(fill_in,basedir,binary_file,xyzt_file)
+
+IMPLICIT NONE
+!SAVE
+
+!CONTAINS
+!     Fill in value used for abnormal case (e.g., below bottom, dry etc)
+! INTEGER :: fill_in
+ REAL, INTENT (OUT) :: fill_in
+! basedir - directory where binary and build point files are stored
+ CHARACTER(len=*), INTENT (OUT) :: basedir 
+
+!     binary_file - 'elev.61', 'hvel.64' etc; it should be inside basedir
+ CHARACTER(len=*), INTENT (OUT) :: binary_file ! elev.61, salt.63 ...
+
+
+ CHARACTER(len=*), INTENT (OUT) :: xyzt_file
+ 
+ CHARACTER(500) :: buffer
+ CHARACTER(30) :: label
+ INTEGER :: ios, ios2, leng
+ INTEGER :: ValuePos, CommentPos
+
+ios=0
+OPEN(UNIT=20,FILE="extract_options")
+
+ DO WHILE (ios==0) 
+
+ 	READ(20,"(A)",iostat=ios) buffer
+
+        Valuepos = scan(buffer, '=',.TRUE.)! search last = .True.
+	CommentPos = scan(buffer, '!')
+	label=TRIM(buffer(1:Valuepos-1))
+
+	
+        IF (CommentPos==0) THEN
+		buffer=TRIM(buffer(Valuepos+1:))
+	ELSE
+		buffer=TRIM(buffer(Valuepos+1:CommentPos-1)) 
+        END IF         
+        
+
+	SELECT CASE(TRIM(label))
+
+        case('fill_in')
+		read(buffer,*,iostat=ios2) fill_in
+	case('basedir')
+		read(buffer,*,iostat=ios2) basedir
+	case('binary_file')
+		read(buffer,*,iostat=ios2) binary_file
+	case('xyzt_file')
+		read(buffer,*,iostat=ios2) xyzt_file
+
+	END SELECT
+
+ END DO
+
+
+   leng=len_trim(basedir)
+	IF (basedir(leng:leng) .NE. '/' ) THEN
+		basedir(leng+1:leng+1)='/'
+	ENDIF	
+
+ CLOSE(20)
+      write(*,*) 'basedir: ', basedir, 'binary file: ', binary_file
+END SUBROUTINE
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+
+
+
+
+END MODULE
+!END PROGRAM

@@ -1,0 +1,11 @@
+fig1 = figure(1);
+winsize = get(fig1, 'position');
+numframes=54;
+M = moviein(numframes, fig1, winsize);
+
+for z = 1:numframes
+    gr_plot(gr.hgrid,u(:,z)); %surface velocity
+    M(:,z) = getframe(fig1, winsize);
+end
+
+movie(fig1, M, 2, 3, winsize);

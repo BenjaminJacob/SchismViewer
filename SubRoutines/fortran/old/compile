@@ -1,0 +1,3 @@
+ifort -c -assume byterecl -O2 -Bstatic read_options_mod.f90
+ifort -c -assume byterecl -O2 -Bstatic read_output7_xyz.f90 UtilLib/compute_zcor.f90 UtilLib/pt_in_poly.f90
+ifort -o read_output7_xyz read_output7_xyz.o read_options_mod.o compute_zcor.o pt_in_poly.o

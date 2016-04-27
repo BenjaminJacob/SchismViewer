@@ -1,0 +1,9 @@
+fill_in=-9999       !Fill in value used for abnormal case (e.g., below bottom, dry etc)
+rundir="/media/benjamin/DATAPART1/runs/WindExperiments"   !directory where grid files are stored (e.ge one level above outputs)
+basedir="/media/benjamin/DATAPART1/runs/WindExperiments/reference/combined"   !basedir - directory where binary and build point files are stored
+binary_file=Delev_240minRef.61 !binary_file - elev.61, hvel.64 etc; it should be inside basedir
+istack1=2 !     istack[1,2] - start and end stack # for binary outputs;
+istack2=30
+bp_file=station.bp !  bp_file - build point file (see station.ts.sample / station.xyzt.sample)
+ics=2  ! (ics=1: Cartesian coordinates; =2: lat/lon.
+ifs=0 !ifs=0: input z are z coordinates;ifs =1: input z are relative to free surface; and in this case, make sure all z>=0

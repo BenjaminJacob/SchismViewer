@@ -1,0 +1,5 @@
+0 2 0  !itransect,ics,ifs (itransect=0: time series; =1:transect. ics=1: Cartesian coordinates; =2: lat/lon. ifs=0: input z are z coordinates; =1: input z are relative to free surface; and in this case, make sure all z>=0 :
+3 !total # of points
+   1       9.754183      53.555673 0.0000 !point #, x, y, z
+   2       9.811687      53.550716 0.0000
+   3      10.076404      53.454545 0.0000

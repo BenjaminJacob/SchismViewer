@@ -1,0 +1,19 @@
+This is a m-elio package (matlab elio)
+It works with output of ELCIRC and SELFE models (Data Format 3.0, 4.0, and 5.0)
+It also includes an interpolation (in xy) and visualization (in xy).
+For more details see EXAMPLE_*.m files
+
+Limitations: functions: *_computeZlevels.m and ob_ini_staFromPars.m work most of the time. 
+- *_computeZlevels.m will give different results than SELFE at dry nodes
+- ob_ini_staFromPars.m uses matlab triangulation tools. Hence, can give different results than ELCIRC for quadrangular elements, and on the non-convex parts of the grid boundary. 
+
+%%%%%%%%%%
+% overview of function-groups
+
+eb_* 	- operations on ELCIRC files (ata Format 3.0)
+gr_*	- operations on grid files
+map_*	- maps from binary format to hotstart format (numberHNodes, numberVLevs)
+ob_*	- horizontal interpolation
+sb_*	- operations on SELFE pure sigma grid files (ata Format 4.0)
+sz_*    - operations on SELFE sigma-z grid files (ata Format 5.0)
+

@@ -1,0 +1,9 @@
+fill_in=-9999       !Fill in value used for abnormal case (e.g., below bottom, dry etc)
+rundir="/home/benjamin/Desktop/REMOTE/hero_transfer/hero_home/Setups/GermanBightEstuaries/DBucht_Estuaries_enhncd"   !directory where grid files are stored (e.ge one level above outputs)
+basedir="/home/benjamin/Desktop/TRANSFER/waddensea_cuttoff/combined"   !basedir - directory where binary and build point files are stored
+binary_file=elev.61 !binary_file - elev.61, hvel.64 etc; it should be inside basedir
+istack1=1 !     istack[1,2] - start and end stack # for binary outputs;
+istack2=3
+bp_file=station.bp !  bp_file - build point file (see station.ts.sample / station.xyzt.sample)
+ics=1  ! (ics=1: Cartesian coordinates; =2: lat/lon.
+ifs=0 !ifs=0: input z are z coordinates;ifs =1: input z are relative to free surface; and in this case, make sure all z>=0

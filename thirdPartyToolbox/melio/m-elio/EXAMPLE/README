@@ -1,0 +1,4 @@
+this directory contains examples of reading and visulaising the hotstart and elcirc files
+elcircSource  	- directory with modified elcirc source that outputs sidecenter grid
+grid_db11  	- sample directory with computed grid info for db11 grid. see README in the directory for details
+vis_example.m	- sample program

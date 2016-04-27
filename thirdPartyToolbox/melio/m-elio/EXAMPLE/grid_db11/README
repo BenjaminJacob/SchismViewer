@@ -1,0 +1,12 @@
+this directory contains primary and secondary grid files, 
+and some programs to genrate grid information 
+primary goal is to generate file gr.mat that contains grid info used by melio programs
+
+if you need to procces new grid do the following:
+1) make new directory
+2) coppy ztest02g_da01c grGen.m param.in from this direcotry
+3) coppy new hgrid.gr3 vgrid.in
+4) run ./ztest02g_da01c 
+5) is elcirc doesn't have enough mne mnp change elcirc source code in ../elircSource
+6) run script grGen.m in matlab
+

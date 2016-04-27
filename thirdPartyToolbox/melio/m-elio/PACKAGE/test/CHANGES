@@ -1,0 +1,5 @@
+March 21, 2006
+	sz_computeZlevels.m - fixed array concatination and bottom layer depth errors
+November 07, 2006
+	corrected corrupted file EXAMPLE_ELCIRC.m
+	fixed errors in sz_computeZlevels.m
